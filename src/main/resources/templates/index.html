@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Filter reviews</title>
+</head>
+<style>
+  .dropDown{
+    height: 40px;
+    width: 220px;
+  }
+</style>
+<body>
+<h3>
+  Filter reviews
+</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <form action="/filter" method="POST">
+
+<div class="form-group">
+  <label>Order by rating:</label><br>
+  <select name="order_rating" class="dropDown">
+    <option th:value="${'highest'}">Highest First</option>
+    <option th:value="${'lowest'}">Lowest First</option>
+  </select>
+</div>
+        <div class="form-group">
+          <label>Minimum rating:</label><br>
+          <select name="minimum_rating" class="dropDown">
+            <option th:value="${'1'}">1</option>
+            <option th:value="${'2'}">2</option>
+            <option th:value="${'3'}">3</option>
+            <option th:value="${'4'}">4</option>
+            <option th:value="${'5'}">5</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Order by date:</label><br>
+          <select name="order_date" class="dropDown">
+            <option th:value="${'oldestFirst'}">Oldest First</option>
+            <option th:value="${'newestFirst'}">Newest First</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Prioretize by text:</label><br>
+          <select name="prioretize_text" class="dropDown">
+            <option th:value="${'yes'}">Yes</option>
+            <option th:value="${'no'}">No</option>
+          </select>
+        </div>
+        <button id="submit" type="submit" class="btn btn-primary"
+                style="background: royalblue; color: white; border: royalblue">Filter</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<p>
+<form th:action="@{'/index'}">
+  <button type="submit" style="background: royalblue; color: white; border: royalblue">
+    <i class="fa fa-trash">Un Filtered</i>
+  </button>
+</form>
+</p>
+<div>
+  <table>
+    <thead>
+    <tr>
+      <th>reviewText:</th>
+      <th>reviewCreatedOnDate:</th>
+      <th>rating:</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reviews : ${reviews}" class="reviews">
+      <td th:text="${reviews.getReviewText()}">ok</td>
+      <td th:text="${reviews.getReviewCreatedOnDate()}"></td>
+      <td th:text="${reviews.getRating()}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!--<div>-->
+<!--  <table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th>reviewText:</th>-->
+<!--      <th>reviewCreatedOnDate:</th>-->
+<!--      <th>rating:</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="filtered : ${filtered}" class="reviews">-->
+<!--      <td th:text="${filtered.getReviewText()}">ok</td>-->
+<!--      <td th:text="${filtered.getReviewCreatedOnDate()}"></td>-->
+<!--      <td th:text="${filtered.getRating()}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+<!--</div>-->
+
+</body>
+</html>
